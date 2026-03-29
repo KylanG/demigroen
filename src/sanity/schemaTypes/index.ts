@@ -1,5 +1,6 @@
 import { type SchemaTypeDefinition } from 'sanity'
 import siteSettings from './siteSettings'
+import footerSettings from './footerSettings'
 import heroSection from './heroSection'
 import textImageSection from './textImageSection'
 import statsSection from './statsSection'
@@ -12,6 +13,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     button,
     siteSettings,
+    footerSettings,
     heroSection,
     textImageSection,
     statsSection,

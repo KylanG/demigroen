@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
+import Container from '@/components/Container'
 
 export default function ClientSlider({ heading, logos, hasBackground = true }: any) {
   if (!logos?.length) return null
@@ -16,9 +17,11 @@ export default function ClientSlider({ heading, logos, hasBackground = true }: a
     <section className={`w-full py-16 ${bg} overflow-hidden`}>
 
       {heading && (
-        <h2 className={`text-2xl md:text-3xl font-bold ${headingColor} text-center mb-12 px-8`}>
-          {heading}
-        </h2>
+        <Container>
+          <h2 className={`text-2xl md:text-3xl font-bold ${headingColor} text-center mb-12`}>
+            {heading}
+          </h2>
+        </Container>
       )}
 
       {/* Fade edges */}

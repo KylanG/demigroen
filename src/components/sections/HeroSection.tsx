@@ -1,5 +1,6 @@
 import { urlFor } from '@/sanity/image'
 import Image from 'next/image'
+import Container from '@/components/Container'
 
 export default function HeroSection({ heading, text, primaryButton, secondaryButton, image, video }: any) {
   return (
@@ -25,30 +26,32 @@ export default function HeroSection({ heading, text, primaryButton, secondaryBut
       <div className="absolute inset-0 bg-black/40" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center h-full px-8 md:px-16 max-w-4xl">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">{heading}</h1>
-        <p className="text-lg text-white/80 mb-8 max-w-xl">{text}</p>
+      <Container className="relative z-10 flex flex-col justify-center h-full">
+        <div className="max-w-2xl">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">{heading}</h1>
+          <p className="text-lg text-white/80 mb-8 max-w-xl">{text}</p>
 
-        {/* Buttons */}
-        <div className="flex flex-row gap-4">
-          {primaryButton?.label && primaryButton?.url && (
-            <a
-              href={primaryButton.url}
-              className="bg-pink-500 text-white px-6 py-3 rounded-full font-medium hover:bg-pink-600 transition"
-            >
-              {primaryButton.label}
-            </a>
-          )}
-          {secondaryButton?.label && secondaryButton?.url && (
-            <a
-              href={secondaryButton.url}
-              className="border border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:text-black transition"
-            >
-              {secondaryButton.label}
-            </a>
-          )}
+          {/* Buttons */}
+          <div className="flex flex-row gap-4">
+            {primaryButton?.label && primaryButton?.url && (
+              <a
+                href={primaryButton.url}
+                className="bg-pink-500 text-white px-6 py-3 rounded-full font-medium hover:bg-pink-600 transition"
+              >
+                {primaryButton.label}
+              </a>
+            )}
+            {secondaryButton?.label && secondaryButton?.url && (
+              <a
+                href={secondaryButton.url}
+                className="border border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white hover:text-black transition"
+              >
+                {secondaryButton.label}
+              </a>
+            )}
+          </div>
         </div>
-      </div>
+      </Container>
 
     </section>
   )

@@ -21,7 +21,7 @@ export default defineConfig({
   schema,
   document: {
     actions: (prev, context) => {
-      if (context.schemaType === 'siteSettings') {
+      if (context.schemaType === 'siteSettings' || context.schemaType === 'footerSettings') {
         return prev.filter(({ action }) => action === 'publish' || action === 'discardChanges' || action === 'restore')
       }
       return prev

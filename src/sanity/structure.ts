@@ -1,7 +1,21 @@
 import type {StructureResolver} from 'sanity/structure'
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
+const singletons = ['siteSettings', 'footerSettings']
+
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
-    .items(S.documentTypeListItems())
+    .items([
+      S.listItem()
+        .title('Site Instellingen')
+        .id('siteSettings')
+        .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+      S.listItem()
+        .title('Footer Instellingen')
+        .id('footerSettings')
+        .child(S.document().schemaType('footerSettings').documentId('footerSettings')),
+      S.divider(),
+      ...S.documentTypeListItems().filter(
+        (item) => !singletons.includes(item.getId() ?? '')
+      ),
+    ])

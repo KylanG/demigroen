@@ -1,6 +1,7 @@
 import { client } from '@/sanity/client'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
+import Container from '@/components/Container'
 
 async function getSiteSettings() {
   return await client.fetch(`*[_type == "siteSettings"][0]{
@@ -15,8 +16,8 @@ export default async function Navbar() {
   const settings = await getSiteSettings()
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-[#8B1A5E] px-8 py-4 flex items-center justify-between max-h-24">
-      
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-[#8B1A5E] max-h-24">
+      <Container className="py-4 flex items-center justify-between">
       {/* Logo */}
       <a href="/" className="text-white font-bold text-xl leading-tight" style={{ fontFamily: 'var(--font-playfair)' }}>
         {settings?.logo ? (
@@ -62,7 +63,7 @@ export default async function Navbar() {
           {settings.ctaButton.label}
         </a>
       )}
-
+      </Container>
     </nav>
   )
 }

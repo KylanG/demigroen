@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { urlFor } from '@/sanity/image'
+import Container from '@/components/Container'
 
 export default function TextImageSection({
   heading,
@@ -14,9 +15,10 @@ export default function TextImageSection({
   const dark = hasBackground
 
   return (
-    <section className={`w-full py-20 px-8 md:px-16 ${dark ? 'bg-[#8B1A5E]' : 'bg-white'}`}>
+    <section className={`w-full py-20 ${dark ? 'bg-[#8B1A5E]' : 'bg-white'}`}>
+      <Container>
       <div
-        className={`max-w-6xl mx-auto flex flex-col ${
+        className={`flex flex-col ${
           isImageLeft ? 'md:flex-row-reverse' : 'md:flex-row'
         } items-center gap-12`}
       >
@@ -76,6 +78,7 @@ export default function TextImageSection({
         )}
 
       </div>
+      </Container>
     </section>
   )
 }

@@ -1,7 +1,10 @@
+import Container from '@/components/Container'
+
 export default function StatsSection({ heading, stats, link }: any) {
   return (
-    <section className="w-full py-20 px-8 md:px-16 bg-[#F5EEE7]">
-      <div className="max-w-5xl mx-auto text-center">
+    <section className="w-full py-20 bg-[#F5EEE7]">
+      <Container>
+      <div className="text-center">
 
         {/* Heading */}
         {heading && (
@@ -44,6 +47,7 @@ export default function StatsSection({ heading, stats, link }: any) {
         )}
 
       </div>
+      </Container>
     </section>
   )
 }
