@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig = {
+  experimental: {
+    optimizePackageImports: ['sanity'],
+  },
   images: {
     remotePatterns: [
       {

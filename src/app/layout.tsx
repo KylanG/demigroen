@@ -17,6 +17,13 @@ export const metadata: Metadata = {
   description: 'Video-first content voor beauty founders',
 }
 
+// Suppress the automatic YouTube preconnect hint that Next.js adds
+// when it detects an iframe — it causes an "unused preconnect" warning
+// on pages that don't have a video.
+export const viewport = {
+  themeColor: '#8B1A5E',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
