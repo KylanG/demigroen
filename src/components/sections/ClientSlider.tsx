@@ -37,6 +37,7 @@ export default function ClientSlider({ heading, logos, hasBackground = true }: a
                 src={urlFor(logo).url()}
                 alt={logo.alt ?? ''}
                 fill
+                sizes="160px"
                 className="object-contain"
               />
             </div>

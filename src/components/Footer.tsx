@@ -76,6 +76,7 @@ export default async function Footer() {
                   src={urlFor(footer.logo).url()}
                   alt={siteSettings?.siteName ?? 'Logo'}
                   fill
+                  sizes="144px"
                   className="object-contain object-left brightness-0 invert"
                 />
               </div>

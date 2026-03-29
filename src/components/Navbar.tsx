@@ -26,6 +26,7 @@ export default async function Navbar() {
             alt={settings.siteName ?? 'Logo'}
             width={80}
             height={50}
+            priority
             className="object-contain"
           />
         ) : (

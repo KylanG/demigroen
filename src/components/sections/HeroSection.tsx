@@ -18,6 +18,8 @@ export default function HeroSection({ heading, text, primaryButton, secondaryBut
           src={urlFor(image).url()}
           alt={heading ?? ''}
           fill
+          priority
+          sizes="100vw"
           className="object-cover"
         />
       ) : null}

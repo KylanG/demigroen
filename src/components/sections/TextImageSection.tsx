@@ -72,6 +72,7 @@ export default function TextImageSection({
               src={urlFor(image).url()}
               alt={image.alt ?? heading ?? ''}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
           </div>
