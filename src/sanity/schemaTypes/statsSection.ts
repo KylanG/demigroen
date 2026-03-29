@@ -9,6 +9,7 @@ export default defineType({
       name: 'heading',
       title: 'Titel (optioneel)',
       type: 'string',
+      description: 'Laat leeg als je geen titel boven de statistieken wilt',
     }),
     defineField({
       name: 'stats',
@@ -25,6 +26,16 @@ export default defineType({
             select: { title: 'value', subtitle: 'label' },
           },
         },
+      ],
+    }),
+    defineField({
+      name: 'link',
+      title: 'Link (optioneel)',
+      type: 'object',
+      description: 'Wordt weergegeven als een tekstlink met pijl onder de statistieken',
+      fields: [
+        { name: 'label', title: 'Label', type: 'string' },
+        { name: 'url', title: 'URL', type: 'string' },
       ],
     }),
   ],

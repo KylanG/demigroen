@@ -11,19 +11,28 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'clients',
-      title: 'Klanten',
+      name: 'hasBackground',
+      title: 'Paarse achtergrond',
+      type: 'boolean',
+      description: 'Zet aan voor de paarse achtergrond (zelfde kleur als de navigatiebalk). Logo\'s worden automatisch wit.',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'logos',
+      title: 'Afbeeldingen',
       type: 'array',
       of: [
         {
-          type: 'object',
+          type: 'image',
+          options: { hotspot: true },
           fields: [
-            { name: 'name', title: 'Klantnaam', type: 'string' },
-            { name: 'logo', title: 'Logo', type: 'image', options: { hotspot: true } },
+            {
+              name: 'alt',
+              title: 'Alternatieve tekst',
+              type: 'string',
+              description: 'Bijv. "Logo van Bedrijfsnaam"',
+            },
           ],
-          preview: {
-            select: { title: 'name', media: 'logo' },
-          },
         },
       ],
     }),

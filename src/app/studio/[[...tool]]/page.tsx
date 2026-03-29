@@ -1,14 +1,10 @@
-import { client } from '@/sanity/client'
-import SectionRenderer from '@/components/SectionRenderer'
+'use client'
 
-export default async function HomePage() {
-  const page = await client.fetch(
-    `*[_type == "page" && slug.current == "home"][0]{
-      sections
-    }`
-  )
+import { NextStudio } from 'next-sanity/studio'
+import config from '../../../../sanity.config'
 
-  if (!page) return <p>Geen homepagina gevonden</p>
+export const dynamic = 'force-static'
 
-  return <SectionRenderer sections={page.sections} />
+export default function StudioPage() {
+  return <NextStudio config={config} />
 }

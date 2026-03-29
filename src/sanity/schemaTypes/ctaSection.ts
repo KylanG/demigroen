@@ -13,20 +13,12 @@ export default defineType({
     defineField({
       name: 'primaryButton',
       title: 'Primaire Knop',
-      type: 'object',
-      fields: [
-        { name: 'label', title: 'Label', type: 'string' },
-        { name: 'url', title: 'URL', type: 'string' },
-      ],
+      type: 'button',
     }),
     defineField({
       name: 'secondaryButton',
       title: 'Secundaire Knop (optioneel)',
-      type: 'object',
-      fields: [
-        { name: 'label', title: 'Label', type: 'string' },
-        { name: 'url', title: 'URL', type: 'string' },
-      ],
+      type: 'button',
     }),
   ],
   preview: {

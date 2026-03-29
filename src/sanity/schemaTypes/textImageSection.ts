@@ -18,26 +18,26 @@ export default defineType({
     defineField({
       name: 'primaryButton',
       title: 'Primaire Knop',
-      type: 'object',
-      fields: [
-        { name: 'label', title: 'Label', type: 'string' },
-        { name: 'url', title: 'URL', type: 'string' },
-      ],
+      type: 'button',
     }),
     defineField({
       name: 'secondaryButton',
       title: 'Secundaire Knop',
-      type: 'object',
-      fields: [
-        { name: 'label', title: 'Label', type: 'string' },
-        { name: 'url', title: 'URL', type: 'string' },
-      ],
+      type: 'button',
     }),
     defineField({
       name: 'image',
       title: 'Afbeelding',
       type: 'image',
       options: { hotspot: true },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternatieve tekst',
+          type: 'string',
+          description: 'Beschrijf de afbeelding voor slechtzienden en zoekmachines',
+        }),
+      ],
     }),
     defineField({
       name: 'imagePosition',
@@ -53,19 +53,11 @@ export default defineType({
       initialValue: 'right',
     }),
     defineField({
-      name: 'backgroundColor',
-      title: 'Achtergrondkleur',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Geen achtergrond', value: 'none' },
-          { title: 'Licht', value: 'light' },
-          { title: 'Donker', value: 'dark' },
-          { title: 'Accent', value: 'accent' },
-        ],
-        layout: 'radio',
-      },
-      initialValue: 'none',
+      name: 'hasBackground',
+      title: 'Achtergrond',
+      type: 'boolean',
+      description: 'Zet aan voor de paarse achtergrond (zelfde kleur als de navigatiebalk)',
+      initialValue: false,
     }),
   ],
   preview: {

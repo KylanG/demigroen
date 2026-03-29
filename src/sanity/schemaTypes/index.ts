@@ -6,9 +6,11 @@ import statsSection from './statsSection'
 import ctaSection from './ctaSection'
 import clientSlider from './clientSlider'
 import page from './page'
+import button from './button'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
+    button,
     siteSettings,
     heroSection,
     textImageSection,

@@ -9,55 +9,44 @@ export default defineType({
       name: 'heading',
       title: 'Titel (H1)',
       type: 'string',
+      validation: (Rule) => Rule.required().error('De hero heeft een titel nodig'),
     }),
     defineField({
       name: 'text',
       title: 'Tekst',
       type: 'text',
+      description: 'Korte inleidende tekst onder de titel',
     }),
     defineField({
       name: 'primaryButton',
       title: 'Primaire Knop',
-      type: 'object',
-      fields: [
-        { name: 'label', title: 'Label', type: 'string' },
-        { name: 'url', title: 'URL', type: 'string' },
-      ],
+      type: 'button',
     }),
     defineField({
       name: 'secondaryButton',
       title: 'Secundaire Knop',
-      type: 'object',
-      fields: [
-        { name: 'label', title: 'Label', type: 'string' },
-        { name: 'url', title: 'URL', type: 'string' },
-      ],
-    }),
-    defineField({
-      name: 'mediaType',
-      title: 'Media Type',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Afbeelding', value: 'image' },
-          { title: 'Video', value: 'video' },
-        ],
-        layout: 'radio',
-      },
+      type: 'button',
     }),
     defineField({
       name: 'image',
       title: 'Afbeelding',
       type: 'image',
       options: { hotspot: true },
-      hidden: ({ parent }) => parent?.mediaType !== 'image',
+      description: 'Wordt alleen gebruikt als er geen video is ingevuld',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternatieve tekst',
+          type: 'string',
+          description: 'Beschrijf de afbeelding voor slechtzienden en zoekmachines',
+        }),
+      ],
     }),
     defineField({
       name: 'video',
       title: 'Video URL',
       type: 'url',
-      description: 'YouTube, Vimeo of directe video URL',
-      hidden: ({ parent }) => parent?.mediaType !== 'video',
+      description: 'YouTube embed URL — heeft prioriteit boven afbeelding',
     }),
   ],
   preview: {
