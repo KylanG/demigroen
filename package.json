@@ -18,6 +18,12 @@
     "sanity": "^4.22.0",
     "styled-components": "^6.3.12"
   },
+  "browserslist": [
+    "chrome >= 109",
+    "firefox >= 115",
+    "safari >= 15.6",
+    "edge >= 109"
+  ],
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
