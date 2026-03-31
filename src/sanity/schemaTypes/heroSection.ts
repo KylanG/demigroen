@@ -46,7 +46,7 @@ export default defineType({
       name: 'video',
       title: 'Video URL',
       type: 'url',
-      description: 'YouTube embed URL — heeft prioriteit boven afbeelding',
+      description: 'Direct .mp4 URL (bijv. Cloudinary) of YouTube embed URL — heeft prioriteit boven afbeelding',
     }),
   ],
   preview: {

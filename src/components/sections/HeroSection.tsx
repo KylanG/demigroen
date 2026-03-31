@@ -8,12 +8,26 @@ export default function HeroSection({ heading, text, primaryButton, secondaryBut
 
       {/* Achtergrond video of afbeelding */}
       {video ? (
-        <iframe
-          src={`${video.replace('youtube.com', 'youtube-nocookie.com')}?controls=0&modestbranding=1&rel=0&showinfo=0&autoplay=1&mute=1&loop=1&playlist=${video.split('/embed/')[1]}`}
-          title="Achtergrond video"
-          className="absolute top-1/2 left-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-          allowFullScreen
-        />
+        video.includes('/embed/') ? (
+          // YouTube iframe fallback
+          <iframe
+            src={`${video.replace('youtube.com', 'youtube-nocookie.com')}?controls=0&modestbranding=1&rel=0&showinfo=0&autoplay=1&mute=1&loop=1&playlist=${video.split('/embed/')[1]}`}
+            title="Achtergrond video"
+            className="absolute top-1/2 left-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            allowFullScreen
+          />
+        ) : (
+          // Self-hosted .mp4 (Cloudinary, Mux, etc.)
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
+          >
+            <source src={video} type="video/mp4" />
+          </video>
+        )
       ) : image ? (
         <Image
           src={urlFor(image).url()}
