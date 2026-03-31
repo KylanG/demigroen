@@ -58,7 +58,7 @@ export default async function Navbar() {
           href={settings.ctaButton.url}
           target={settings.ctaButton.newTab ? '_blank' : '_self'}
           rel={settings.ctaButton.newTab ? 'noopener noreferrer' : undefined}
-          className="bg-pink-500 text-white px-6 py-3 rounded-full font-medium hover:bg-pink-600 transition"
+          className="bg-pink-600 text-white px-6 py-3 rounded-full font-medium hover:bg-pink-700 transition"
           style={{ fontFamily: 'var(--font-montserrat)' }}
         >
           {settings.ctaButton.label}

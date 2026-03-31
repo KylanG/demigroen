@@ -98,7 +98,7 @@ export default async function Footer() {
               href={footer.button.url ?? '#'}
               target={footer.button.newTab ? '_blank' : undefined}
               rel={footer.button.newTab ? 'noopener noreferrer' : undefined}
-              className="inline-block bg-[#FF1F9C] text-white text-sm font-medium px-6 py-3 rounded-full hover:opacity-90 transition w-fit"
+              className="inline-block bg-pink-600 text-white text-sm font-medium px-6 py-3 rounded-full hover:bg-pink-700 transition w-fit"
             >
               {footer.button.label}
             </a>

@@ -53,7 +53,7 @@ export default function HeroSection({ heading, text, primaryButton, secondaryBut
             {primaryButton?.label && primaryButton?.url && (
               <a
                 href={primaryButton.url}
-                className="bg-pink-500 text-white px-6 py-3 rounded-full font-medium hover:bg-pink-600 transition"
+                className="bg-pink-600 text-white px-6 py-3 rounded-full font-medium hover:bg-pink-700 transition"
               >
                 {primaryButton.label}
               </a>
