@@ -88,6 +88,8 @@ export default defineType({
     }),
   ],
   preview: {
-    select: { title: 'siteName' },
+    prepare() {
+      return { title: 'Header Instellingen' }
+    },
   },
 })
