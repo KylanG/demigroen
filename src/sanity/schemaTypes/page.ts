@@ -58,6 +58,15 @@ export default defineType({
       ],
     }),
   ],
+  initialValue: {
+    sections: [
+      {
+        _type: 'heroSection',
+        _key: 'default-hero',
+        heading: 'Paginatitel',
+      },
+    ],
+  },
   preview: {
     select: { title: 'title', subtitle: 'slug.current' },
   },
