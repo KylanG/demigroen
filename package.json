@@ -4,24 +4,37 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "node scripts/patch-react-useeffectevent.cjs",
+    "seed": "node scripts/seed.cjs"
   },
   "dependencies": {
+    "@portabletext/react": "^6.0.3",
+    "@sanity/icons": "^3.7.4",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/ui": "^3.1.14",
+    "@sanity/vision": "^5.20.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "next": "15.5.15",
+    "next-sanity": "^12.2.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "next": "15.5.15"
+    "react-icons": "^5.6.0",
+    "resend": "^6.10.0",
+    "sanity": "^5.20.0",
+    "styled-components": "^6.4.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.15",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
