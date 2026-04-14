@@ -1,6 +1,6 @@
 # SSUPPLY Starter v1.0 — Projectspecificatie
 
-> Laatst bijgewerkt: 12 april 2026, 00:00
+> Laatst bijgewerkt: 14 april 2026, 00:00
 > Status: ✅ Volledig gebouwd en werkend
 
 Dit document beschrijft de volledige specificatie van de **SSUPPLY Starter v1.0** boilerplate.
@@ -164,7 +164,23 @@ Commit altijd een `.env.local.example` met dezelfde sleutels maar lege waarden.
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-primary: #2563eb;           /* ← aanpassen per klant */
+  /* ┌─────────────────────────────────────────────────────┐
+     │  KLEUR TOKENS — aanpasbaar per klantproject         │
+     │                                                     │
+     │  Aanpasbaar:                                        │
+     │    --color-primary             hoofdkleur           │
+     │    --color-primary-foreground  tekst op primary     │
+     │    --color-secondary           ondersteunende kleur │
+     │    --color-secondary-foreground tekst op secondary  │
+     │    --color-background          pagina achtergrond   │
+     │    --color-body                standaard tekstkleur │
+     │                                                     │
+     │  Niet aanpassen (afgeleid):                         │
+     │    --color-muted               subtiele tekst       │
+     │    --color-border              randjes               │
+     └─────────────────────────────────────────────────────┘ */
+
+  --color-primary: #2563eb;
   --color-primary-foreground: #ffffff;
   --color-secondary: #64748b;
   --color-secondary-foreground: #ffffff;
@@ -192,7 +208,7 @@ Commit altijd een `.env.local.example` met dezelfde sleutels maar lege waarden.
 
 Drie utility-klassen zijn geregistreerd via `@utility`: `transition-fast`, `transition-base`, `transition-slow`.
 
-> ⚠️ `--color-primary` is het enige token dat per klantproject aangepast wordt.
+> ⚠️ Pas per klantproject **alleen** de aanpasbare tokens aan (zie commentaar hierboven). Raak `--color-muted` en `--color-border` niet aan.
 
 ---
 
@@ -597,7 +613,7 @@ npm run seed    # Sanity seed documenten aanmaken/overschrijven
 
 ## 21. Conventies
 
-- **Primaire kleur:** alleen `--color-primary` in `globals.css` aanpassen per klant
+- **Kleur tokens:** zie sectie 5 voor welke tokens aanpasbaar zijn per klant en welke niet
 - **Design tokens:** gebruik `bg-background`, `text-body`, `text-muted`, `border-border`, `py-section`, `rounded-md`, `rounded-sm`, `transition-base` — nooit hardcoded Tailwind grijswaarden
 - **Meertaligheid:** alle tekstvelden in blokken zijn `localizedString`/`localizedText` — ophalen via `getLang(field, locale)`
 - **Afbeeldingen:** altijd `next/image` + `urlFor()` van Sanity CDN, altijd een alt-tekst veld
