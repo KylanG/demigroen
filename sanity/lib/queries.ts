@@ -14,6 +14,7 @@ export const siteSettingsQuery = groq`
     gtmId,
     ga4Id,
     googleSiteVerification,
+    socials,
   }
 `
 
@@ -38,9 +39,18 @@ export const footerSettingsQuery = groq`
   *[_type == "footerSettings" && _id == "footerSettings"][0] {
     logo,
     logoAlt,
-    columns,
-    socials,
-    copyright,
+    description,
+    ctaButton,
+    menu1Title,
+    "menu1Links": menu1Links[defined(page->slug.current)] {
+      "label": coalesce(label, page->title),
+      "href": "/" + page->slug.current,
+    },
+    menu2Title,
+    "menu2Links": menu2Links[defined(page->slug.current)] {
+      "label": coalesce(label, page->title),
+      "href": "/" + page->slug.current,
+    },
   }
 `
 
@@ -52,6 +62,7 @@ export const pageBySlugQuery = groq`
     heroSubheading,
     heroImage,
     heroImageAlt,
+    heroVideo,
     heroPrimaryCta,
     heroSecondaryCta,
     blocks,

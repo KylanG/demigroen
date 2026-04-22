@@ -6,6 +6,7 @@ export const siteSettings = defineType({
   type: 'document',
   groups: [
     { name: 'algemeen', title: 'Algemeen', default: true },
+    { name: 'socialmedia', title: 'Social Media' },
     { name: 'analytics', title: 'Analytics' },
     { name: 'seo', title: 'SEO' },
     { name: 'notfound', title: '404-pagina' },
@@ -59,6 +60,22 @@ export const siteSettings = defineType({
       type: 'image',
       group: 'algemeen',
       description: 'Wordt gebruikt in het webmanifest voor Android/PWA.',
+    }),
+
+    // ── Tab: Social Media ─────────────────────────────────────────────
+    defineField({
+      name: 'socials',
+      title: 'Sociale media',
+      type: 'object',
+      group: 'socialmedia',
+      fields: [
+        defineField({ name: 'linkedin', title: 'LinkedIn', type: 'url' }),
+        defineField({ name: 'instagram', title: 'Instagram', type: 'url' }),
+        defineField({ name: 'facebook', title: 'Facebook', type: 'url' }),
+        defineField({ name: 'twitter', title: 'Twitter / X', type: 'url' }),
+        defineField({ name: 'tiktok', title: 'TikTok', type: 'url' }),
+        defineField({ name: 'youtube', title: 'YouTube', type: 'url' }),
+      ],
     }),
 
     // ── Tab: Analytics ────────────────────────────────────────────────

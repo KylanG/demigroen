@@ -2,12 +2,12 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-primary: #2563eb;
+  --color-primary: #861054;
   --color-primary-foreground: #ffffff;
-  --color-secondary: #64748b;
+  --color-secondary: #FF0090;
   --color-secondary-foreground: #ffffff;
-  --color-background: #f9f9f9;
-  --color-body: #1a1a1a;
+  --color-background: #F5EEE7;
+  --color-body: #000000;
   --color-muted: #6b7280;
   --color-border: #e5e7eb;
 
@@ -23,8 +23,23 @@
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-body);
+  --font-display: var(--font-heading);
+}
+
+
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+  h1 {
+    font-size: 3.25rem;
+  }
 }
 
 @utility transition-fast {
@@ -37,4 +52,50 @@
 
 @utility transition-slow {
   transition: color var(--transition-slow), background-color var(--transition-slow), border-color var(--transition-slow), opacity var(--transition-slow), box-shadow var(--transition-slow), transform var(--transition-slow);
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-secondary);
+  color: var(--color-primary-foreground);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: color var(--transition-base), background-color var(--transition-base), opacity var(--transition-base);
+  &:hover { opacity: 0.75; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-white);
+  color: var(--color-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: color var(--transition-base), background-color var(--transition-base), opacity var(--transition-base);
+  &:hover { opacity: 0.75; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-white);
+  color: var(--color-primary);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  background-color: transparent;
+  transition: color var(--transition-base), background-color var(--transition-base), border-color var(--transition-base);
+  &:hover { background-color: color-mix(in srgb, var(--color-primary) 8%, transparent); }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
 }

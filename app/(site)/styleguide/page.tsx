@@ -2,12 +2,13 @@ import type { Metadata } from 'next'
 import {
   FaLinkedin, FaInstagram, FaFacebook, FaXTwitter,
   FaArrowRight, FaCheck, FaEnvelope, FaPhone, FaLocationDot,
-  FaStar, FaHeart, FaCircleCheck, FaCircleXmark, FaTriangleExclamation,
-  FaCircleInfo,
+  FaStar, FaHeart, FaCircleCheck, FaCircleXmark, FaTriangleExclamation, FaCircleInfo,
 } from 'react-icons/fa6'
+import { client } from '@/sanity/lib/client'
+import { siteSettingsQuery } from '@/sanity/lib/queries'
 
 export const metadata: Metadata = {
-  title: 'Styleguide — SSUPPLY Starter',
+  title: 'Styleguide',
   robots: { index: false, follow: false },
 }
 
@@ -26,20 +27,23 @@ function Row({ label, children }: { label?: string; children: React.ReactNode })
   return (
     <div className="mb-6">
       {label && <p className="text-xs text-gray-400 mb-2 font-mono">{label}</p>}
-      <div className="flex flex-wrap items-start gap-4">{children}</div>
+      <div className="flex flex-wrap items-start gap-8">{children}</div>
     </div>
   )
 }
 
 // ── Pagina ────────────────────────────────────────────────────────────────
 
-export default function StyleguidePage() {
+export default async function StyleguidePage() {
+  const siteSettings = await client.fetch(siteSettingsQuery).catch(() => null)
+  const siteName = siteSettings?.siteName ?? 'Site'
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
       {/* Header */}
       <div className="mb-12 pb-8 border-b-2 border-primary">
-        <p className="text-xs font-mono text-primary uppercase tracking-widest mb-2">SSUPPLY Starter</p>
+        <p className="text-xs font-mono text-primary uppercase tracking-widest mb-2">{siteName}</p>
         <h1 className="text-5xl font-bold text-gray-900">Styleguide</h1>
         <p className="mt-3 text-gray-500">Overzicht van alle UI-elementen, tokens en componenten.</p>
       </div>
@@ -48,7 +52,7 @@ export default function StyleguidePage() {
       <nav className="mb-12 p-5 bg-gray-50 rounded-xl text-sm">
         <p className="font-semibold text-gray-700 mb-3">Inhoudsopgave</p>
         <ol className="grid sm:grid-cols-2 gap-1 list-decimal list-inside text-gray-500">
-          {['Kleuren', 'Typografie', 'Knoppen', 'Formulierelementen', 'Iconen', 'Feedback & badges', 'Kaarten'].map((item) => (
+          {['Kleuren', 'Typografie', 'Knoppen', 'Formulierelementen', 'Iconen', 'Kaarten'].map((item) => (
             <li key={item}>
               <a href={`#${item.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
                 className="hover:text-primary transition-colors">
@@ -61,20 +65,15 @@ export default function StyleguidePage() {
 
       {/* ── 1. Kleuren ───────────────────────────────────────────────── */}
       <Section title="1. Kleuren" id="kleuren">
-        <Row label="Brand">
-          <ColorSwatch name="primary" className="bg-primary" />
-          <ColorSwatch name="primary-foreground" className="bg-primary-foreground border border-gray-200" />
-        </Row>
-        <Row label="Grijs (Tailwind)">
-          {(['50','100','200','300','400','500','600','700','800','900','950'] as const).map((shade) => (
-            <ColorSwatch key={shade} name={shade} className={`bg-gray-${shade}`} />
-          ))}
-        </Row>
-        <Row label="Semantisch">
-          <ColorSwatch name="success" className="bg-green-500" />
-          <ColorSwatch name="warning" className="bg-amber-400" />
-          <ColorSwatch name="error" className="bg-red-500" />
-          <ColorSwatch name="info" className="bg-blue-500" />
+        <Row>
+          <ColorSwatch name="primary" value="#861054" style={{ backgroundColor: 'var(--color-primary)' }} />
+          <ColorSwatch name="primary-foreground" value="#ffffff" style={{ backgroundColor: 'var(--color-primary-foreground)' }} border />
+          <ColorSwatch name="secondary" value="#FF0090" style={{ backgroundColor: 'var(--color-secondary)' }} />
+          <ColorSwatch name="secondary-foreground" value="#ffffff" style={{ backgroundColor: 'var(--color-secondary-foreground)' }} border />
+          <ColorSwatch name="background" value="#F5EEE7" style={{ backgroundColor: 'var(--color-background)' }} border />
+          <ColorSwatch name="body" value="#000000" style={{ backgroundColor: 'var(--color-body)' }} />
+          <ColorSwatch name="muted" value="#6b7280" style={{ backgroundColor: 'var(--color-muted)' }} />
+          <ColorSwatch name="border" value="#e5e7eb" style={{ backgroundColor: 'var(--color-border)' }} border />
         </Row>
       </Section>
 
@@ -149,52 +148,21 @@ export default function StyleguidePage() {
       {/* ── 3. Knoppen ───────────────────────────────────────────────── */}
       <Section title="3. Knoppen" id="knoppen">
         <Row label="Variant">
-          <button className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity text-sm">
-            Primair
-          </button>
-          <button className="px-5 py-2.5 rounded-lg border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-colors text-sm">
-            Secundair
-          </button>
-          <button className="px-5 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors text-sm">
-            Outline
-          </button>
-          <button className="px-5 py-2.5 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition-colors text-sm">
-            Ghost
-          </button>
-          <button className="px-5 py-2.5 rounded-lg bg-gray-900 text-white font-medium hover:opacity-90 transition-opacity text-sm">
-            Donker
-          </button>
-          <button className="px-5 py-2.5 rounded-lg bg-red-500 text-white font-medium hover:opacity-90 transition-opacity text-sm">
-            Destructief
-          </button>
-        </Row>
-        <Row label="Grootte">
-          <button className="px-3 py-1.5 rounded-md bg-primary text-primary-foreground font-medium text-xs">
-            Klein (xs)
-          </button>
-          <button className="px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium text-sm">
-            Normaal (sm)
-          </button>
-          <button className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-base">
-            Groot (base)
-          </button>
-          <button className="px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium text-lg">
-            Extra groot (lg)
-          </button>
+          <button className="btn-primary">Primair</button>
+          <button className="btn-secondary">Secundair</button>
+          <button className="btn-outline">Outline</button>
         </Row>
         <Row label="Met icoon">
-          <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
+          <button className="btn-primary gap-2">
             Verder <FaArrowRight className="w-3.5 h-3.5" />
           </button>
-          <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-medium text-sm hover:bg-gray-50 transition-colors">
+          <button className="btn-outline gap-2">
             <FaCheck className="w-3.5 h-3.5" /> Bevestigen
           </button>
         </Row>
         <Row label="Status">
-          <button disabled className="px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm opacity-50 cursor-not-allowed">
-            Uitgeschakeld
-          </button>
-          <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium text-sm opacity-70 cursor-wait">
+          <button disabled className="btn-primary">Uitgeschakeld</button>
+          <button className="btn-primary gap-2 opacity-70 cursor-wait">
             <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
@@ -203,7 +171,7 @@ export default function StyleguidePage() {
           </button>
         </Row>
         <Row label="Volledig breed">
-          <button className="w-full max-w-sm px-5 py-3 rounded-lg bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity">
+          <button className="btn-primary w-full max-w-sm">
             Volledige breedte
           </button>
         </Row>
@@ -302,43 +270,8 @@ export default function StyleguidePage() {
         </Row>
       </Section>
 
-      {/* ── 6. Feedback & badges ─────────────────────────────────────── */}
-      <Section title="6. Feedback & badges" id="feedback-badges">
-        <Row label="Alerts">
-          <div className="w-full space-y-3 max-w-xl">
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 text-sm">
-              <FaCircleCheck className="w-4 h-4 mt-0.5 shrink-0" />
-              <p><strong>Succes:</strong> Je bericht is succesvol verzonden.</p>
-            </div>
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 text-sm">
-              <FaCircleXmark className="w-4 h-4 mt-0.5 shrink-0" />
-              <p><strong>Fout:</strong> Er is iets misgegaan. Probeer het opnieuw.</p>
-            </div>
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-sm">
-              <FaTriangleExclamation className="w-4 h-4 mt-0.5 shrink-0" />
-              <p><strong>Waarschuwing:</strong> Let op deze actie kan niet ongedaan worden gemaakt.</p>
-            </div>
-            <div className="flex items-start gap-3 p-4 rounded-lg bg-blue-50 border border-blue-200 text-blue-800 text-sm">
-              <FaCircleInfo className="w-4 h-4 mt-0.5 shrink-0" />
-              <p><strong>Info:</strong> De nieuwe versie is beschikbaar vanaf volgende week.</p>
-            </div>
-          </div>
-        </Row>
-        <Row label="Badges / pills">
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary text-primary-foreground">Primair</span>
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">Neutraal</span>
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">Succes</span>
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">Fout</span>
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">Waarschuwing</span>
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">Info</span>
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-900 text-white">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" /> Live
-          </span>
-        </Row>
-      </Section>
-
-      {/* ── 7. Kaarten ───────────────────────────────────────────────── */}
-      <Section title="7. Kaarten" id="kaarten">
+      {/* ── 6. Kaarten ───────────────────────────────────────────────── */}
+      <Section title="6. Kaarten" id="kaarten">
         <div className="grid sm:grid-cols-3 gap-4">
           <div className="rounded-xl border border-gray-200 p-5 shadow-sm">
             <p className="text-xs uppercase tracking-widest text-gray-400 mb-2">Standaard kaart</p>
@@ -364,11 +297,15 @@ export default function StyleguidePage() {
 
 // ── Sub-componenten ───────────────────────────────────────────────────────
 
-function ColorSwatch({ name, className }: { name: string; className: string }) {
+function ColorSwatch({ name, value, style, border }: { name: string; value: string; style: React.CSSProperties; border?: boolean }) {
   return (
-    <div className="flex flex-col items-center gap-1.5">
-      <div className={`w-12 h-12 rounded-lg shadow-sm ${className}`} />
-      <span className="font-mono text-xs text-gray-500">{name}</span>
+    <div className="flex flex-col items-center gap-2">
+      <div
+        className={`w-14 h-14 rounded-lg shadow-sm${border ? ' border border-gray-200' : ''}`}
+        style={style}
+      />
+      <span className="font-mono text-xs text-gray-700 font-medium">{name}</span>
+      <span className="font-mono text-xs text-gray-400">{value}</span>
     </div>
   )
 }

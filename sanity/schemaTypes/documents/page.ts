@@ -45,12 +45,20 @@ export const page = defineType({
       type: 'image',
       group: 'pagina',
       options: { hotspot: true },
+      description: 'Wordt als volledige achtergrond gebruikt. Geen afbeelding én geen video = gekleurde achtergrond.',
     }),
     defineField({
       name: 'heroImageAlt',
       title: 'Hero afbeelding alt-tekst',
       type: 'localizedString',
       group: 'pagina',
+    }),
+    defineField({
+      name: 'heroVideo',
+      title: 'Hero achtergronvideo (URL)',
+      type: 'url',
+      group: 'pagina',
+      description: 'Directe URL naar een .mp4 bestand. Overschrijft de afbeelding als beide zijn ingevuld.',
     }),
     defineField({
       name: 'heroPrimaryCta',

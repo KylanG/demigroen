@@ -10,6 +10,7 @@ import { urlFor } from '@/sanity/lib/image'
 interface HeaderSettings {
   logo?: any
   logoAlt?: string
+  siteName?: string
   navigation?: Array<{ label: string; href: string; blank: boolean }>
   ctaButton?: { label: string; href: string; blank: boolean }
 }
@@ -22,9 +23,9 @@ export default function Header({ settings }: { settings: HeaderSettings }) {
   const cta = settings?.ctaButton
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+    <header className="sticky top-0 z-50 bg-primary shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-22.5">
           {/* Logo */}
           <Link href="/" className="shrink-0">
             {settings?.logo ? (
@@ -36,20 +37,20 @@ export default function Header({ settings }: { settings: HeaderSettings }) {
                 className="h-8 w-auto object-contain"
               />
             ) : (
-              <span className="font-bold text-xl text-primary">SSUPPLY</span>
+              <span className="font-bold text-xl text-white">{settings?.siteName ?? 'Site'}</span>
             )}
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-15">
             {nav.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 target={link.blank ? '_blank' : undefined}
                 rel={link.blank ? 'noopener noreferrer' : undefined}
-                className={`text-sm font-medium transition-base hover:text-primary ${
-                  pathname === link.href ? 'text-primary' : 'text-body'
+                className={`text-base font-medium transition-base hover:text-white/70 ${
+                  pathname === link.href ? 'text-white' : 'text-white'
                 }`}
               >
                 {link.label}
@@ -64,7 +65,7 @@ export default function Header({ settings }: { settings: HeaderSettings }) {
                 href={cta.href}
                 target={cta.blank ? '_blank' : undefined}
                 rel={cta.blank ? 'noopener noreferrer' : undefined}
-                className="hidden md:inline-flex items-center px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-base"
+                className="hidden md:btn-primary bg-white text-primary hover:opacity-90"
               >
                 {cta.label}
               </Link>
@@ -72,7 +73,7 @@ export default function Header({ settings }: { settings: HeaderSettings }) {
 
             {/* Hamburger */}
             <button
-              className="md:hidden p-2 rounded-sm text-body hover:bg-background transition-base"
+              className="md:hidden p-2 rounded-sm text-white hover:bg-white/10 transition-base"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Menu openen"
             >
@@ -90,7 +91,7 @@ export default function Header({ settings }: { settings: HeaderSettings }) {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden border-t border-border bg-white px-4 pb-4 pt-2 space-y-1">
+        <div className="md:hidden bg-primary px-4 pb-4 pt-2 space-y-1">
           {nav.map((link) => (
             <Link
               key={link.href}
@@ -100,8 +101,8 @@ export default function Header({ settings }: { settings: HeaderSettings }) {
               onClick={() => setMenuOpen(false)}
               className={`block px-3 py-2 rounded-sm text-sm font-medium transition-base ${
                 pathname === link.href
-                  ? 'text-primary bg-primary/10'
-                  : 'text-body hover:bg-background'
+                  ? 'text-white bg-white/20'
+                  : 'text-white hover:bg-white/10'
               }`}
             >
               {link.label}
@@ -113,7 +114,7 @@ export default function Header({ settings }: { settings: HeaderSettings }) {
               target={cta.blank ? '_blank' : undefined}
               rel={cta.blank ? 'noopener noreferrer' : undefined}
               onClick={() => setMenuOpen(false)}
-              className="block mt-2 px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium text-center"
+              className="block mt-2 px-4 py-2 rounded-md bg-white text-primary text-sm font-medium text-center"
             >
               {cta.label}
             </Link>

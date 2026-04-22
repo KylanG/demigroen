@@ -136,6 +136,7 @@ export interface HeroData {
   heroSubheading?: LocalizedText
   heroImage?: SanityImageAsset
   heroImageAlt?: LocalizedString
+  heroVideo?: string
   heroPrimaryCta?: LinkObject
   heroSecondaryCta?: LinkObject
 }

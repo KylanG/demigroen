@@ -116,7 +116,7 @@ export default function ContactSection({ section }: { section: ContactSectionTyp
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full py-3 px-6 bg-primary text-primary-foreground font-medium rounded-md hover:opacity-90 transition-base disabled:opacity-60"
+              className="btn-primary w-full"
             >
               {status === 'loading' ? 'Versturen…' : 'Verstuur bericht'}
             </button>

@@ -1,5 +1,30 @@
 import { defineField, defineType } from 'sanity'
 
+const menuLinkObject = {
+  type: 'object',
+  title: 'Link',
+  fields: [
+    defineField({
+      name: 'label',
+      title: 'Label',
+      type: 'string',
+      description: 'Laat leeg om de paginatitel te gebruiken.',
+    }),
+    defineField({
+      name: 'page',
+      title: 'Pagina',
+      type: 'reference',
+      to: [{ type: 'page' }],
+    }),
+  ],
+  preview: {
+    select: { label: 'label', pageTitle: 'page.title' },
+    prepare: ({ label, pageTitle }: { label?: string; pageTitle?: string }) => ({
+      title: label || pageTitle || 'Naamloos',
+    }),
+  },
+}
+
 export const footerSettings = defineType({
   name: 'footerSettings',
   title: 'Footer Instellingen',
@@ -17,41 +42,38 @@ export const footerSettings = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'columns',
-      title: 'Linkkolommen',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({ name: 'title', title: 'Kolomtitel', type: 'string' }),
-            defineField({
-              name: 'links',
-              title: 'Links',
-              type: 'array',
-              of: [{ type: 'linkObject' }],
-            }),
-          ],
-          preview: { select: { title: 'title' } },
-        },
-      ],
+      name: 'description',
+      title: 'Beschrijving',
+      type: 'text',
+      rows: 3,
+      description: 'Korte tekst onder het logo in de footer.',
     }),
     defineField({
-      name: 'socials',
-      title: 'Sociale media',
-      type: 'object',
-      fields: [
-        defineField({ name: 'linkedin', title: 'LinkedIn', type: 'url' }),
-        defineField({ name: 'instagram', title: 'Instagram', type: 'url' }),
-        defineField({ name: 'facebook', title: 'Facebook', type: 'url' }),
-        defineField({ name: 'twitter', title: 'Twitter / X', type: 'url' }),
-      ],
+      name: 'ctaButton',
+      title: 'CTA Knop',
+      type: 'linkObject',
     }),
     defineField({
-      name: 'copyright',
-      title: 'Copyright tekst',
+      name: 'menu1Title',
+      title: 'Menu 1 — Titel',
       type: 'string',
-      description: 'Bijv. © 2025 Bedrijfsnaam. Alle rechten voorbehouden.',
+    }),
+    defineField({
+      name: 'menu1Links',
+      title: 'Menu 1 — Links',
+      type: 'array',
+      of: [menuLinkObject],
+    }),
+    defineField({
+      name: 'menu2Title',
+      title: 'Menu 2 — Titel',
+      type: 'string',
+    }),
+    defineField({
+      name: 'menu2Links',
+      title: 'Menu 2 — Links',
+      type: 'array',
+      of: [menuLinkObject],
     }),
   ],
   preview: {

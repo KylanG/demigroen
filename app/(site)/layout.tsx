@@ -34,9 +34,9 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
 
   return (
     <>
-      <Header settings={headerSettings} />
+      <Header settings={{ ...headerSettings, siteName: siteSettings?.siteName }} />
       <main>{children}</main>
-      <Footer settings={footerSettings} />
+      <Footer settings={{ ...footerSettings, siteName: siteSettings?.siteName, socials: siteSettings?.socials }} />
       {isPreview && <PreviewBanner />}
       <CookieBanner
         gtmId={siteSettings?.gtmId ?? undefined}

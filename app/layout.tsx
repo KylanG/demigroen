@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Playfair_Display, Montserrat } from 'next/font/google'
 import './globals.css'
 import { client } from '@/sanity/lib/client'
 import { siteSettingsQuery } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 
-const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
-const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
+const headingFont = Playfair_Display({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-heading' })
+const bodyFont = Montserrat({ subsets: ['latin'], weight: ['400', '600'], variable: '--font-body' })
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -40,8 +40,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nl">
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
+    <html lang="nl" className={`${headingFont.variable} ${bodyFont.variable}`}>
+      <body className="font-sans antialiased">
         {children}
       </body>
     </html>
